@@ -7,7 +7,7 @@ import time
 
 class LoadVacancies:
     """
-    obtaining vacancies from pages
+    obtaining vacancies, which lay in pages
     """
     def __init__(self, folder_pagination, folder_vacancies):
         self.folder_pagination = folder_pagination
@@ -17,23 +17,20 @@ class LoadVacancies:
         animation = ["    *", "    **", "    ***", "    ****", "    *****", "    ******", "          "]
         i = 0
         for file in os.listdir(self.folder_pagination):
-            f = open(f'{self.folder_pagination}{file}', encoding='utf-8')
-            jsonObj = json.loads(f.read())
-            f.close()
-            try:
-                for v in jsonObj['items']:
-                    print(animation[i % len(animation)], end="\r")  # animation in command line
-                    i += 1
-                    req = requests.get(v['url'])
-                    data = req.content.decode()
-                    req.close()
-                    fileName = f'{self.folder_vacancies}{v["id"]}.json'
-                    f = open(fileName, mode='w', encoding='utf8')
-                    f.write(data)
-                    f.close()
-                    t = random.randint(1, 10)
-                    time.sleep(0.01 * t)
-            except KeyError:
-                pass
+            with open(f'{self.folder_pagination}{file}', encoding='utf-8') as f:
+                jsonObj = json.loads(f.read())
+                try:
+                    for v in jsonObj['items']:
+                        print(animation[i % len(animation)], end="\r")  # animation in command line
+                        i += 1
+                        fileName = f'{self.folder_vacancies}{v["id"]}.json'
+                        with open(fileName, mode='w', encoding='utf8') as file:
+                            file.write(requests.get(v['url']).text)
+                        time.sleep(0.01 * random.randint(1, 10))
+                except KeyError:
+                    print('ERROR')
 
 
+if __name__ == '__main__':
+    x = LoadVacancies('./docs/pagination/', './docs/vacancies/')
+    x.get_vacancies()

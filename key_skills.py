@@ -35,6 +35,6 @@ class Extractor:
 
 
 if __name__ == "__main__":
-    obj = Extractor('./docs/vacancies/', 'Аналитик')
+    obj = Extractor('./docs/vacancies/', '')
     obj.extract_key_skills()
 

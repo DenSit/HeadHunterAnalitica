@@ -43,5 +43,5 @@ class Requirements:
 
 
 if __name__ == "__main__":
-    key_skills = Requirements('Python developer')
+    key_skills = Requirements('Аналитик')
     key_skills.get_vacancies()

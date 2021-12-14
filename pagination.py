@@ -1,5 +1,4 @@
 import requests
-import json
 import time
 import random
 
@@ -14,12 +13,9 @@ class LoadPages:
 
     def pagination(self):
         for page in range(0, 10):
-            jsObj = json.loads(self.getPage(page))
-            nextFileName = f'{self.pagination_folder}{page}.json'
-            with open(nextFileName, mode='w', encoding='utf8') as f:
-                f.write(json.dumps(jsObj, ensure_ascii=False))
-                t = random.randint(1, 100)
-                time.sleep(0.01 * t)
+            with open(f'{self.pagination_folder}{page}.json', mode='w', encoding='utf8') as f:
+                f.write(self.getPage(page))
+                time.sleep(0.01 * random.randint(1, 10))
 
     def getPage(self, page=0):
         params = {
@@ -29,7 +25,6 @@ class LoadPages:
             'per_page': 100
         }
         req = requests.get('https://api.hh.ru/vacancies', params)
-        data = req.content.decode()
-        return data
+        return req.text
 
 
