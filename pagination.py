@@ -5,7 +5,9 @@ import random
 
 
 class LoadPages:
-
+    """
+    getting response from api HH (pages) in json
+    """
     def __init__(self, pagination_folder, vacancy):
         self.pagination_folder = pagination_folder
         self.vacancy = vacancy

@@ -4,7 +4,9 @@ import operator
 
 
 class Extractor:
-
+    """
+    extracting key skills, counting, sorting and writing in file
+    """
     def __init__(self, folder, name_vacancy=''):
         self.key_skills = {}
         self.folder = folder

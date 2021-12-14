@@ -6,7 +6,9 @@ import time
 
 
 class LoadVacancies:
-
+    """
+    obtaining vacancies from pages
+    """
     def __init__(self, folder_pagination, folder_vacancies):
         self.folder_pagination = folder_pagination
         self.folder_vacancies = folder_vacancies
@@ -20,7 +22,7 @@ class LoadVacancies:
             f.close()
             try:
                 for v in jsonObj['items']:
-                    print(animation[i % len(animation)], end="\r")
+                    print(animation[i % len(animation)], end="\r")  # animation in command line
                     i += 1
                     req = requests.get(v['url'])
                     data = req.content.decode()
