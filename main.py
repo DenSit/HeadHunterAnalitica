@@ -25,7 +25,7 @@ class Requirements:
         LoadVacancies(self.folder_pagination, self.folder_vacancies).get_vacancies()
         Extractor(self.folder_vacancies, self.vacancy).extract_key_skills()
         print("Ключевые навыки извлечены, подсчитаны, отсортированны в порядке убывания и записаны в файл "
-              f"'{self.vacancy}.txt' ")
+              f"'docs/key_skills/{self.vacancy}.txt' ")
 
     def cleaner(self):
         """
@@ -43,5 +43,5 @@ class Requirements:
 
 
 if __name__ == "__main__":
-    key_skills = Requirements('Аналитик')
+    key_skills = Requirements('Python developer')
     key_skills.get_vacancies()
